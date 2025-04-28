@@ -9,7 +9,7 @@ const Navbar = () => {
   const user = useSelector(store => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(user);
+  // console.log(user);
 
   const handleLogout = async()=>{
     try{
@@ -18,9 +18,9 @@ const Navbar = () => {
       });
       dispatch(removeUser());
       return navigate("/login");
-      console.log("Logout Successful!!!");
+      // console.log("Logout Successful!!!");
     }catch(err){
-      console.log("Error : " + err);
+      // console.log("Error : " + err);
     }
   }
   return (
@@ -48,7 +48,8 @@ const Navbar = () => {
                   <span className="badge">New</span>
                 </Link>
               </li>
-              <li><a>Settings</a></li>
+              <li><Link to="/connections">Friends</Link></li>
+              <li><Link to="/requests">Connection Requests</Link></li>
               <li><a onClick={handleLogout}>Logout</a></li>
             </ul>
           </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import UserCard from './userCard';
+import UserCard from './UserCard';
 import { BaseUrl } from '../utils/constants';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';

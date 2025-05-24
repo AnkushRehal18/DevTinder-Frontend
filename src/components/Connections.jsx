@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { BaseUrl } from '../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addConnections } from '../utils/connectionSlice'
+import { Link } from 'react-router-dom'
 
 const Connections = () => {
     const dispatch = useDispatch();
@@ -12,7 +13,6 @@ const Connections = () => {
             const res = await axios.get(BaseUrl + "/user/connections", {
                 withCredentials: true
             })
-            console.log("here are your connections ", res.data.data)
             dispatch(addConnections(res.data.data));
 
         } catch (err) {
@@ -34,15 +34,20 @@ const Connections = () => {
         </div>
         <div className='flex flex-col items-center'>
             {connections.map(connection => {
-                const { firstName, lastName, age, gender, photoUrl, about } = connection;
+                const {_id, firstName, lastName, age, gender, photoUrl, about } = connection;
                 return (
                     <ul className="list bg-base-300 rounded-box shadow-md w-[400px] my-2" key={connection._id}>
                         <li className="list-row flex gap-4 p-4">
                             <div><img className="size-20 rounded-box" src={photoUrl} alt="profile" /></div>
-                            <div>
-                                <div className="font-bold my-2">{firstName} {lastName}</div>
-                                <p className="list-col-wrap text-xs my-2">{age && gender &&(age + "," + gender)}</p>
-                                <p className="list-col-wrap text-xs ">{about}</p>
+                            <div className='flex gap-x-4 w-full'>
+                                <div>
+                                    <div className="font-bold my-2">{firstName} {lastName}</div>
+                                    <p className="list-col-wrap text-xs my-2">{age && gender && (age + "," + gender)}</p>
+                                    <p className="list-col-wrap text-xs ">{about}</p>
+                                </div>
+                                <div>
+                                  <Link to={"/chat/"+ _id}>  <button className='btn btn-primary'>Chat</button></Link>
+                                </div>
                             </div>
                         </li>
                     </ul>
